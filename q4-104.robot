@@ -9,8 +9,7 @@ Resource          q4-config.resource
 104 login
     [Documentation]  104 login
     Login
-    #Page Should Contain Element    xpath:/html/body/div[2]/div[1]/div[1]/div/div[1]/div/div[2]/div[1]    ${MY_NAME}
-    Page Should Contain     ${MY_NAME}
+    Page Should Contain Element    xpath://div[@class="h2 mb-3"]    ${MY_NAME}
     Logout
 
 *** Keywords ***
@@ -24,7 +23,11 @@ Login
     Sleep    2s
     Click Element    css=#global_bk > ul > li.right > ul > li.personal
     Click Link    My104會員中心
-    Sleep    2s
+    Sleep    3s
+    ${WindowHandle} =  Get Window Handles
+    Switch Window        ${WindowHandle}[0]
+    Close Window    
+    Switch Window        ${WindowHandle}[1]  
 
 Logout
     Click Link   登出
